@@ -77,7 +77,7 @@ client.on('chat', (channel, user, message, self) => {
                     queueList = '<div class="queueitem"><span class="profileimage"><img style="' + imageSize + '" src="' + profileImage + '" alt=""/></span>' +
                         '<span class="displayname" style="' + fontSize + '">' + user['display-name'] + '</span></div>';
 
-                    $(queueList).appendTo('#container');
+                    $(queueList).appendTo('#container').hide().fadeIn("slow");
 
                 });
             }
