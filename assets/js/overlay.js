@@ -53,14 +53,20 @@ client.on('chat', (channel, user, message, self) => {
 
     const args = message.slice(1).split(' ');
     const command = args.shift().toLowerCase();
-    const commandReset = message.split(' ')[1];
+    const commandOption1 = message.split(' ')[1];
+    const commandOption2 = message.split(' ')[2];
 
     if (command === queueCommand) {
         // Reset command
         if (user.mod || user.username.toLowerCase() === channelName.toLowerCase()) {
-            if (commandReset === 'reset') {
+            if (commandOption1 === 'reset') {
                 // Reload browser source
                 window.location.reload();
+                return true;
+            }
+            if (commandOption1 === 'remove' && commandOption2 > '') {
+                $('#user_' + user.username).remove();
+                return true;
             }
         }
 
@@ -74,7 +80,7 @@ client.on('chat', (channel, user, message, self) => {
                     let imageSize = "max-height:" + parseInt(size) * 2 + "px;";
                     let fontSize = "font-size:" + size + "px;";
 
-                    queueList = '<div class="queueitem"><span class="profileimage"><img style="' + imageSize + '" src="' + profileImage + '" alt=""/></span>' +
+                    queueList = '<div class="queueitem" id="user_' + user.username + '"><span class="profileimage"><img style="' + imageSize + '" src="' + profileImage + '" alt=""/></span>' +
                         '<span class="displayname" style="' + fontSize + '">' + user['display-name'] + '</span></div>';
 
                     $(queueList).appendTo('#container').hide().fadeIn("slow");
