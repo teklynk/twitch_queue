@@ -23,10 +23,11 @@ This project uses [TMI.JS](https://tmijs.com/) to connect to Twitch chat anonymo
 
 ### Notes
 
-**!command reset** = Will reload/reset the queue and reload the browser source. This is limited to mods and streamer. ie: !play reset
+**!command reset** = Will reset the queue and reload the browser source. This is limited to mods and streamer. ie: !play reset
 
-Only one entry per person/username. Command will be ignored if the username is already in the list.
+Only one entry per person/username. Command will be ignored if the username is already in the queue.
 
+You can manually edit the browser source URL in OBS to make some quick changes. Maybe you want to adjust the limit. Look for &limit=5 in the URL and change the value. The &command=play can also be changed to something else.
 ### Custom CSS
 
 Add this CSS to the OBS browser source and modify as needed.
