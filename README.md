@@ -25,6 +25,8 @@ This project uses [TMI.JS](https://tmijs.com/) to connect to Twitch chat anonymo
 
 To reset/restart the list, you will need to manually refresh the browser source.
 
+Only one entry per person/username. Command will be ignored if the username is already in the list.
+
 ### Custom CSS
 
 Add this CSS to the OBS browser source and modify as needed.
