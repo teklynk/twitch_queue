@@ -48,26 +48,37 @@ const client = new tmi.Client({
 
 client.connect();
 
-client.on('message', (channel, tags, message, self) => {
+client.on('chat', (channel, user, message, self) => {
     if (self || !message.startsWith('!')) return;
 
     const args = message.slice(1).split(' ');
     const command = args.shift().toLowerCase();
+    const commandReset = message.split(' ')[1];
 
     if (command === queueCommand) {
+        // Reset command
+        if (user.mod || user.username.toLowerCase() === channelName.toLowerCase()) {
+            if (commandReset === 'reset') {
+                // Reload browser source
+                window.location.reload();
+            }
+        }
+
         let countElements = $('.queueitem').length;
         if (countElements !== parseInt(queueLimit)) {
-            if (tags['display-name'] !== $('.displayname').html()) {
-                getInfo(tags['username'], function (data) {
+            if (user['display-name'] !== $('.displayname').html()) {
+                getInfo(user.username, function (data) {
+
                     profileImage = data.data[0]['profile_image_url'];
 
                     let imageSize = "max-height:" + parseInt(size) * 2 + "px;";
                     let fontSize = "font-size:" + size + "px;";
 
                     queueList = '<div class="queueitem"><span class="profileimage"><img style="' + imageSize + '" src="' + profileImage + '" alt=""/></span>' +
-                        '<span class="displayname" style="' + fontSize + '">' + tags['display-name'] + '</span></div>';
+                        '<span class="displayname" style="' + fontSize + '">' + user['display-name'] + '</span></div>';
 
                     $(queueList).appendTo('#container');
+
                 });
             }
         }

@@ -23,7 +23,7 @@ This project uses [TMI.JS](https://tmijs.com/) to connect to Twitch chat anonymo
 
 ### Notes
 
-To reset/restart the list, you will need to manually refresh the browser source.
+**!command reset** = Will reload/reset the queue and reload the browser source. This is limited to mods and streamer. ie: !play reset
 
 Only one entry per person/username. Command will be ignored if the username is already in the list.
 
