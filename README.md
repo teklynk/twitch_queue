@@ -29,7 +29,14 @@ reset
 **!command remove username** = Will remove the user name from the list. This is limited to mods and streamer. ie: !play
 remove teklynk
 
+The remove feature could be good to "eliminate" a player/user. Maybe the list starts out with 10 user names and you
+remove them... depending on the game or use case.
+
+Unique user names only. No duplicates.
+
 Only one entry per person/username. Command will be ignored if the username is already in the queue.
+
+You can create multiple overlay links that have different parameters. Maybe one for !play and another for !request.
 
 You can manually edit the browser source URL in OBS to make some quick changes. Maybe you want to adjust the limit. Look
 for &limit=5 in the URL and change the value. The &command=play can also be changed to something else.
