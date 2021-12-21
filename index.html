@@ -38,12 +38,12 @@
     </div>
     <div class="form-label-group mb-2">
         <label for="mainAccount">Twitch Account</label>
-        <input type="text" id="mainAccount" class="form-control">
+        <input type="text" id="mainAccount" class="form-control" placeholder="MrCoolStreamer">
     </div>
     <h2>Options</h2>
     <div class="form-label-group mb-2">
         <label for="command">Command</label>
-        <input type="text" id="command" class="form-control">
+        <input type="text" id="command" class="form-control" placeholder="play">
     </div>
     <br>
     <div class="form-group range-slider">
@@ -59,6 +59,18 @@
                value="40" style="height: 0;">
         <small class="text-muted range-slider-value"></small><small
             class="text-muted range-slider-value">&nbsp;px</small>
+    </div>
+    <div>
+        <p>
+        <h1>Notes</h1><br><b>!command reset</b> = Will reset the queue and reload the browser source. This is limited to
+        mods and streamer. ie: !play reset
+        <br><br>
+        Only one entry per person/username. Command will be ignored if the username is already in the queue.
+        <br><br>
+        You can manually edit the browser source URL in OBS to make some quick changes. Maybe you want to adjust the
+        limit. Look for &limit=5 in the URL and change the value. The &command=play can also be changed to something
+        else.
+        </p>
     </div>
     <br>
     <button class="btn btn-lg btn-success btn-block" id="generate_button" type="button">Generate Overlay Link</button>
