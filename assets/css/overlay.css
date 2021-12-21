@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Basic');
+
+html, body {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+}
+.queueitem {
+    margin: 0 0 4px 0;
+}
+
+.profileimage img {
+    border-radius: 100%;
+    vertical-align: middle;
+    border: solid 2px black;
+}
+.displayname {
+    font-family: Basic;
+    vertical-align: middle;
+    padding: 0 0 0 4px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px #000000;
+}

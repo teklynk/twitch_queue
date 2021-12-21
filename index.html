@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Twitch Queue</title>
+    <script src="assets/js/jquery_351.min.js"></script>
+    <link rel="stylesheet" href="assets/css/bootstrap452.min.css">
+    <link rel="stylesheet" href="assets/css/dark.min.css">
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/images/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="assets/images/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/images/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/images/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/images/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/images/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/images/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/images/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/images/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/images/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+</head>
+<style>
+    .hide {
+        display: none;
+    }
+</style>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-10">
+            <h1 class="h3 pt-4 pl-lg-4 text-center">Twitch Queue</h1>
+        </div>
+        <div class="col-2 text-center">
+            <img src="assets/images/robot.gif" style="width: 60px;" alt="">
+        </div>
+    </div>
+    <div class="form-label-group mb-2">
+        <label for="mainAccount">Twitch Account</label>
+        <input type="text" id="mainAccount" class="form-control">
+    </div>
+    <h2>Options</h2>
+    <div class="form-label-group mb-2">
+        <label for="command">Command</label>
+        <input type="text" id="command" class="form-control">
+    </div>
+    <br>
+    <div class="form-group range-slider">
+        <label for="limit">Max Limit</label>
+        <input type="range" max="50" min="1" step="1" class="form-control range-slider-range" id="limit"
+               value="5" style="height: 0;">
+        <small class="text-muted range-slider-value"></small><small
+            class="text-muted range-slider-value">&nbsp;Items</small>
+    </div>
+    <div class="form-group range-slider">
+        <label for="size">Size</label>
+        <input type="range" max="100" min="1" step="1" class="form-control range-slider-range" id="size"
+               value="40" style="height: 0;">
+        <small class="text-muted range-slider-value"></small><small
+            class="text-muted range-slider-value">&nbsp;px</small>
+    </div>
+    <br>
+    <button class="btn btn-lg btn-success btn-block" id="generate_button" type="button">Generate Overlay Link</button>
+    <br>
+    <div id="overlaylink" class="hide"></div>
+</div>
+<script>
+    let rangeSlider = function rangeSlider() {
+        let slider = $('.range-slider'),
+            range = $('.range-slider-range'),
+            value = $('.range-slider-value');
+
+        slider.each(function () {
+
+            value.each(function () {
+                let value = $(this).prev().attr('value');
+                $(this).html(value);
+            });
+
+            range.on('input', function () {
+                $(this).next(value).html(this.value);
+            });
+        });
+    };
+
+    rangeSlider();
+
+    document.getElementById("generate_button").addEventListener("click", function (e) {
+        let mainAccount = document.getElementById("mainAccount").value;
+        let command = document.getElementById("command").value;
+        let limit = document.getElementById("limit").value;
+        let size = document.getElementById("size").value;
+
+        if (!mainAccount) {
+            alert('Twitch username is not set');
+        }
+        if (!command) {
+            alert('Command is not set');
+        }
+
+        //build url
+        if (mainAccount) {
+            let srcURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
+            let overlayUrl = srcURL + "overlay.html?channel=" + mainAccount.toLowerCase() + "&limit=" + limit + "&size=" + size + "&command=" + command;
+            document.getElementById("overlaylink").classList.remove("hide");
+            document.getElementById("overlaylink").innerHTML = "<p>Add this link as a browser source in OBS.<br>" +
+                "<a style='word-break:break-all;' href='" + overlayUrl + "' target='_blank'>" + overlayUrl + "</a></p>";
+        }
+    });
+</script>
+<div class="text-right m-4"><a class="btn btn-link" href="https://github.com/teklynk/twitch_queue"
+                               target="_blank">Github</a>
+</div>
+</body>
+</html>
