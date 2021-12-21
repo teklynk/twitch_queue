@@ -9,6 +9,8 @@ the limit is reached.
 
 This project uses [TMI.JS](https://tmijs.com/) to connect to Twitch chat anonymously.
 
+### [Try it here](https://twitch-queue.pages.dev/)
+
 ### URL Parameters
 
 **channel** = channel name
@@ -19,7 +21,9 @@ This project uses [TMI.JS](https://tmijs.com/) to connect to Twitch chat anonymo
 
 **size** = The size of the avatar and username
 
-### [Try it here](https://twitch-queue.pages.dev/)
+### Notes
+
+To reset/restart the list, you will need to manually refresh the browser source.
 
 ### Custom CSS
 
