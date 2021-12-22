@@ -64,3 +64,12 @@ Add this CSS to the OBS browser source and modify as needed.
     text-shadow: 1px 1px #000000;
 }
 ```
+
+### My modified CSS sample for OBS
+
+```
+body {background: transparent; margin: 0px auto; overflow: hidden;}
+#container {background: #00000099; text-align:left; border-radius: 4px; padding 4px;}
+.queueitem {padding: 8px; margin: 0 8px 0 8px; overflow: hidden;}
+.displayname {font-size: 28px !important;}
+```
