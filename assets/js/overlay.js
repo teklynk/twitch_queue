@@ -65,7 +65,7 @@ client.on('chat', (channel, user, message, self) => {
                 return true;
             }
             if (commandOption1 === 'remove' && commandOption2 > '') {
-                $('#user_' + user.username).remove();
+                $('#user_' + commandOption2.toLowerCase()).remove();
                 return true;
             }
         }
@@ -80,7 +80,7 @@ client.on('chat', (channel, user, message, self) => {
                     let imageSize = "max-height:" + parseInt(size) * 2 + "px;";
                     let fontSize = "font-size:" + size + "px;";
 
-                    queueList = '<div class="queueitem" id="user_' + user.username + '"><span class="profileimage"><img style="' + imageSize + '" src="' + profileImage + '" alt=""/></span>' +
+                    queueList = '<div class="queueitem" id="user_' + user.username.toLowerCase() + '"><span class="profileimage"><img style="' + imageSize + '" src="' + profileImage + '" alt=""/></span>' +
                         '<span class="displayname" style="' + fontSize + '">' + user['display-name'] + '</span></div>';
 
                     $(queueList).appendTo('#container').hide().fadeIn("slow");
