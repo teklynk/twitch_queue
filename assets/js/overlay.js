@@ -57,22 +57,29 @@ client.on('chat', (channel, user, message, self) => {
     const commandOption2 = message.split(' ')[2];
 
     if (command === queueCommand) {
-        // Reset command
+
         if (user.mod || user.username.toLowerCase() === channelName.toLowerCase()) {
+            // Reset command
             if (commandOption1 === 'reset') {
                 // Reload browser source
                 window.location.reload();
                 return true;
             }
+            // Remove user
             if (commandOption1 === 'remove' && commandOption2 > '') {
-                $('#user_' + user.username).remove();
+                $('#user_' + commandOption2.toLowerCase()).remove();
                 return true;
             }
         }
 
+        // Count items
         let countElements = $('.queueitem').length;
-        if (countElements !== parseInt(queueLimit)) {
-            if (user['display-name'] !== $('.displayname').html()) {
+
+        if (countElements !== parseInt(queueLimit) - 1) {
+
+            // If user does not exist
+            if ($('.displayname:contains("' + user['display-name'] + '")').length === 0) {
+
                 getInfo(user.username, function (data) {
 
                     profileImage = data.data[0]['profile_image_url'];
@@ -80,12 +87,13 @@ client.on('chat', (channel, user, message, self) => {
                     let imageSize = "max-height:" + parseInt(size) * 2 + "px;";
                     let fontSize = "font-size:" + size + "px;";
 
-                    queueList = '<div class="queueitem" id="user_' + user.username + '"><span class="profileimage"><img style="' + imageSize + '" src="' + profileImage + '" alt=""/></span>' +
+                    queueList = '<div class="queueitem" id="user_' + user.username.toLowerCase() + '"><span class="profileimage"><img style="' + imageSize + '" src="' + profileImage + '" alt=""/></span>' +
                         '<span class="displayname" style="' + fontSize + '">' + user['display-name'] + '</span></div>';
 
                     $(queueList).appendTo('#container').hide().fadeIn("slow");
 
                 });
+
             }
         }
     }
