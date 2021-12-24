@@ -75,7 +75,7 @@ client.on('chat', (channel, user, message, self) => {
         // Count items
         let countElements = $('.queueitem').length;
 
-        if (countElements !== parseInt(queueLimit) - 1) {
+        if (countElements !== parseInt(queueLimit)) {
 
             // If user does not exist
             if ($('.displayname:contains("' + user['display-name'] + '")').length === 0) {
