@@ -26,8 +26,8 @@ if (!size) {
 }
 
 // Twitch API: user info: user_id
-function getInfo(channelName, callback) {
-    let urlI = "https://twitchapi.teklynk.com/getuserinfo.php?channel=" + channelName + "";
+function getInfo(user_name, callback) {
+    let urlI = "https://twitchapi.teklynk.com/getuserinfo.php?channel=" + user_name + "";
     let xhrI = new XMLHttpRequest();
     xhrI.open("GET", urlI);
     xhrI.onreadystatechange = function () {
