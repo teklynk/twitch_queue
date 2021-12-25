@@ -34,7 +34,7 @@ reset
 remove teklynk
 
 The remove feature could be good to "eliminate" a player/user. Maybe the list starts out with 10 user names and you
-remove them... depending on the game or use case.
+remove them... depending on the game or use case. When you remove a user from the list, another user can then join/be added. Above the overlay, you can add a title like: "!play (Max of 5 players)" to let users know that they can jump in when a spot opens up.
 
 Unique user names only. No duplicates.
 
