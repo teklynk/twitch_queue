@@ -11,6 +11,10 @@ This project uses [TMI.JS](https://tmijs.com/) to connect to Twitch chat anonymo
 
 ### [Try it here](https://twitch-queue.pages.dev/)
 
+### Screenshots
+
+![sample1](https://github.com/teklynk/twitch_queue/blob/main/screenshots/clip.gif?raw=true)
+
 ### URL Parameters
 
 **channel** = channel name
