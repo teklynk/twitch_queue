@@ -13,7 +13,7 @@ This project uses [TMI.JS](https://tmijs.com/) to connect to Twitch chat anonymo
 
 ### Screenshots
 
-![sample1](https://github.com/teklynk/twitch_queue/blob/main/screenshots/clip.gif?raw=true)
+![sample1](https://github.com/teklynk/twitch_queue/blob/master/screenshots/clip.gif?raw=true)
 
 ### URL Parameters
 
