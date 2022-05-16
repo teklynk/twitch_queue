@@ -67,6 +67,8 @@ client.on('chat', (channel, user, message, self) => {
             }
             // Remove user
             if (commandOption1 === 'remove' && commandOption2 > '') {
+                commandOption2 = commandOption2.replace('@', '');
+                commandOption2 = commandOption2.trim();
                 $('#user_' + commandOption2.toLowerCase()).remove();
                 return true;
             }
