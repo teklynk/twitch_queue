@@ -51,10 +51,10 @@ client.connect();
 client.on('chat', (channel, user, message, self) => {
     if (self || !message.startsWith('!')) return;
 
-    const args = message.slice(1).split(' ');
-    const command = args.shift().toLowerCase();
-    const commandOption1 = message.split(' ')[1];
-    const commandOption2 = message.split(' ')[2];
+    let args = message.slice(1).split(' ');
+    let command = args.shift().toLowerCase();
+    let commandOption1 = message.split(' ')[1];
+    let commandOption2 = message.split(' ')[2];
 
     if (command === queueCommand) {
 
