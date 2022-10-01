@@ -9,8 +9,10 @@ let channelName = getUrlParameter('channel');
 let queueLimit = getUrlParameter('limit');
 let queueCommand = getUrlParameter('command');
 let size = getUrlParameter('size');
+let discordWebhook = getUrlParameter('discord');
 let profileImage = 'assets/images/default.jpg';
 let queueList = '';
+let channelProfileImage = '';
 
 if (!channelName) {
     alert('Channel Name is not set');
@@ -42,6 +44,27 @@ function getInfo(user_name, callback) {
     xhrI.send();
 }
 
+// Discord webhook request
+function setDiscordMessage(jdata) {
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("POST", discordWebhook, true);
+    xhttp.setRequestHeader('Content-Type', 'application/json');
+    xhttp.send(JSON.stringify(jdata));
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+        }
+    }
+}
+
+// Gets the channel profile image from Twitch and sets it as a global variable
+getInfo(channelName, function (data) {
+
+    channelProfileImage = data.data[0]['profile_image_url'];
+
+});
+
 const client = new tmi.Client({
     channels: [channelName]
 });
@@ -55,9 +78,11 @@ client.on('chat', (channel, user, message, self) => {
     let command = args.shift().toLowerCase();
     let commandOption1 = message.split(' ')[1];
     let commandOption2 = message.split(' ')[2];
+    let commandMessage = message.slice(message.indexOf(' ') + 1)
 
     if (command === queueCommand) {
 
+        // Mods and Streamer only actions
         if (user.mod || user.username.toLowerCase() === channelName.toLowerCase()) {
             // Reset command
             if (commandOption1 === 'reset') {
@@ -79,8 +104,20 @@ client.on('chat', (channel, user, message, self) => {
 
         if (countElements !== parseInt(queueLimit)) {
 
-            // If user does not exist
+            // If user does not exist in the queue
             if ($('.displayname:contains("' + user['display-name'] + '")').length === 0) {
+
+                // If using a Discord webhook to send messages to a Discord channel/chat
+                if (discordWebhook) {
+                    // If Twitch chat message contains the !command followed by a youtube link
+                    setDiscordMessage(
+                        {
+                            "username": channelName,
+                            "avatar_url": channelProfileImage,
+                            "content": "**!" + command + " - " + user['display-name'] + "** has been added to the queue. **Message:** " + commandMessage + ""
+                        }
+                    );
+                }
 
                 getInfo(user.username, function (data) {
 

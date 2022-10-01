@@ -66,6 +66,9 @@
                 <li>Only one entry per person/username. Command will be ignored if the user name is already in the
                     queue.
                 </li>
+                <li>Discord integration with a webhook. Send !command requests to a Discord channel to keep track of requests.
+
+                </li>
                 <li>You can manually edit the browser source URL in OBS to make some quick changes. Maybe you want to
                     adjust the
                     limit. Look for &limit=5 in the URL and change the value. The &command=play can also be changed to
@@ -105,6 +108,10 @@
                 class="text-muted range-slider-value">&nbsp;px
         </small>
     </div>
+    <div class="form-label-group mb-2">
+        <label for="discord">Discord Webhook URL</label>
+        <input type="url" id="discord" class="form-control" placeholder="https://discord.com/api/webhooks/25f5fe33a6e7425a80116f6a18b61894/9d385dfdba883dfb789777e77f19310c">
+    </div>
     <br>
     <button class="btn btn-lg btn-success btn-block" id="generate_button" type="button">Generate Overlay Link</button>
     <br>
@@ -136,6 +143,7 @@
         let command = document.getElementById("command").value;
         let limit = document.getElementById("limit").value;
         let size = document.getElementById("size").value;
+        let discord = document.getElementById("discord").value;
 
         if (!mainAccount) {
             alert('Twitch username is not set');
@@ -147,7 +155,7 @@
         //build url
         if (mainAccount) {
             let srcURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
-            let overlayUrl = srcURL + "overlay.html?channel=" + mainAccount.toLowerCase() + "&limit=" + limit + "&size=" + size + "&command=" + command;
+            let overlayUrl = srcURL + "overlay.html?channel=" + mainAccount.toLowerCase() + "&limit=" + limit + "&size=" + size + "&command=" + command + "&discord=" + discord;
             overlayUrl = overlayUrl.replace("index.htmloverlay.html", "overlay.html");
             document.getElementById("overlaylink").classList.remove("hide");
             document.getElementById("overlaylink").innerHTML = "<p>Add this link as a browser source in OBS.<br>" +
