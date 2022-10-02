@@ -141,6 +141,9 @@
     document.getElementById("generate_button").addEventListener("click", function (e) {
         let mainAccount = document.getElementById("mainAccount").value;
         let command = document.getElementById("command").value;
+        if (command.startsWith('!')) {
+            command = command.slice(1);
+        }
         let limit = document.getElementById("limit").value;
         let size = document.getElementById("size").value;
         let discord = document.getElementById("discord").value;
