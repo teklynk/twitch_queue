@@ -13,6 +13,7 @@ let discordWebhook = getUrlParameter('discord');
 let profileImage = 'assets/images/default.jpg';
 let queueList = '';
 let channelProfileImage = '';
+let userProfileImage = '';
 
 if (!channelName) {
     alert('Channel Name is not set');
@@ -107,26 +108,27 @@ client.on('chat', (channel, user, message, self) => {
             // If user does not exist in the queue
             if ($('.displayname:contains("' + user['display-name'] + '")').length === 0) {
 
-                // If using a Discord webhook to send messages to a Discord channel/chat
-                if (discordWebhook) {
-                    // If Twitch chat message contains the !command followed by a youtube link
-                    setDiscordMessage(
-                        {
-                            "username": channelName,
-                            "avatar_url": channelProfileImage,
-                            "content": "**!" + command + " - " + user['display-name'] + "** has been added to the queue. **Message:** " + commandMessage + ""
-                        }
-                    );
-                }
-
                 getInfo(user.username, function (data) {
 
-                    profileImage = data.data[0]['profile_image_url'];
+                    userProfileImage = data.data[0]['profile_image_url'];
+
+                    // If using a Discord webhook to send messages to a Discord channel/chat
+                    if (discordWebhook) {
+
+                        // If Twitch chat message contains the !command followed by a message
+                        setDiscordMessage(
+                            {
+                                "username": user['display-name'],
+                                "avatar_url": userProfileImage,
+                                "content": "**!" + command + " - " + user['display-name'] + "** has been added to the queue. **Message:** " + commandMessage + ""
+                            }
+                        );
+                    }
 
                     let imageSize = "max-height:" + parseInt(size) * 2 + "px;";
                     let fontSize = "font-size:" + size + "px;";
 
-                    queueList = '<div class="queueitem" id="user_' + user.username.toLowerCase() + '"><span class="profileimage"><img style="' + imageSize + '" src="' + profileImage + '" alt=""/></span>' +
+                    queueList = '<div class="queueitem" id="user_' + user.username.toLowerCase() + '"><span class="profileimage"><img style="' + imageSize + '" src="' + userProfileImage + '" alt=""/></span>' +
                         '<span class="displayname" style="' + fontSize + '">' + user['display-name'] + '</span></div>';
 
                     $(queueList).appendTo('#container').hide().fadeIn("slow");
