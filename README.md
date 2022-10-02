@@ -45,6 +45,8 @@ You can create multiple overlay links that have different parameters. Maybe one 
 You can manually edit the browser source URL in OBS to make some quick changes. Maybe you want to adjust the limit. Look
 for &limit=5 in the URL and change the value. The &command=play can also be changed to something else.
 
+Discord integration with a webhook. Send !command requests to a Discord channel to keep track of requests.
+
 ### Custom CSS
 
 Add this CSS to the OBS browser source and modify as needed.
